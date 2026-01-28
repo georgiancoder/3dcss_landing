@@ -5,6 +5,8 @@ import {Footer} from './components/footer/footer';
 // initialize firebase (exports db) so it's ready for services/components
 import './firebase';
 
+
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -13,5 +15,6 @@ import './firebase';
   styleUrls: ['./app.css']
 })
 export class App {
+
   protected readonly title = signal('css3dLanding');
 }
