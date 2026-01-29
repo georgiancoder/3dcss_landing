@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>3D CSS Builder – Create & Rate 3D Layouts</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page page--dark">
+
+<!-- Header -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand__logo"></div>
+      <span class="brand__name">3D CSS Builder</span>
+    </div>
+
+    <nav class="nav">
+      <a href="#explore" class="nav__link">Explore</a>
+      <a href="#tutorials" class="nav__link">Tutorials</a>
+      <a href="#community" class="nav__link">Community</a>
+      <a href="#pricing" class="nav__link">Pricing</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#login" class="link-muted">Login</a>
+      <a href="#start" class="btn btn--primary">Start Creating</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero: preview of app -->
+  <section class="hero" id="start">
+    <div class="hero__inner">
+      <div class="hero__preview">
+        <!-- Replace with real screenshot of your app -->
+        <div class="app-frame">
+          <div class="app-frame__sidebar"></div>
+          <div class="app-frame__canvas">
+            <div class="axis axis--x"></div>
+            <div class="axis axis--y"></div>
+            <div class="axis axis--z"></div>
+          </div>
+          <div class="app-frame__controls"></div>
+        </div>
+      </div>
+
+      <div class="hero__content">
+        <h1>Create, share & rate 3D web layouts</h1>
+        <p>
+          Build interactive 3D scenes in the browser, publish them to the gallery,
+          and get instant feedback from other creators.
+        </p>
+        <div class="hero__actions">
+          <a href="#builder" class="btn btn--primary">Try the Builder</a>
+          <a href="#how-it-works" class="btn btn--ghost">Watch Tutorial</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top user works slider -->
+  <section class="section section--slider" id="explore">
+    <div class="section__header">
+      <h2>Top community creations</h2>
+      <p>See the most rated scenes from our creators this week.</p>
+    </div>
+
+    <div class="works-slider">
+      <button class="slider__arrow slider__arrow--left" aria-label="Previous"></button>
+
+      <div class="slider__track">
+        <!-- Slide item -->
+        <article class="work-card work-card--featured">
+          <div class="work-card__thumb">
+            <!-- image -->
+          </div>
+          <div class="work-card__meta">
+            <div class="work-card__user">
+              <div class="avatar"></div>
+              <span class="username">@creator_name</span>
+            </div>
+            <div class="work-card__rating">
+              ★ 4.8 <span class="rating-count">(132)</span>
+            </div>
+            <span class="work-card__tag">Editor’s pick</span>
+          </div>
+        </article>
+
+        <!-- Duplicate article.work-card for more slides -->
+      </div>
+
+      <button class="slider__arrow slider__arrow--right" aria-label="Next"></button>
+    </div>
+
+    <div class="slider__pagination">
+      <button class="dot dot--active"></button>
+      <button class="dot"></button>
+      <button class="dot"></button>
+    </div>
+
+    <div class="section__footer">
+      <a href="#community" class="link-accent">View all community projects</a>
+    </div>
+  </section>
+
+  <!-- Tutorial video section -->
+  <section class="section section--tutorial" id="how-it-works">
+    <div class="section__header">
+      <h2>How it works</h2>
+    </div>
+
+    <div class="tutorial-layout">
+      <div class="tutorial-layout__video">
+        <!-- Replace src with your actual tutorial -->
+        <div class="video-frame">
+          <button class="video-frame__play" aria-label="Play tutorial"></button>
+        </div>
+      </div>
+
+      <div class="tutorial-layout__steps">
+        <ol class="steps">
+          <li class="steps__item">
+            <h3>1. Build in the browser</h3>
+            <p>Use the 3D viewport, side panels, and controls to compose your layout.</p>
+          </li>
+          <li class="steps__item">
+            <h3>2. Publish your scene</h3>
+            <p>Save and publish your work to the community gallery with one click.</p>
+          </li>
+          <li class="steps__item">
+            <h3>3. Rate and get rated</h3>
+            <p>Other users can rate your scenes, leave feedback, and follow your profile.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Create & rate section -->
+  <section class="section section--features" id="builder">
+    <div class="section__header">
+      <h2>Create, share & rate</h2>
+    </div>
+
+    <div class="features">
+      <article class="feature">
+        <h3>Build in 3D</h3>
+        <p>Design scenes on a familiar dark 3D canvas using axis lines and layered panels.</p>
+      </article>
+
+      <article class="feature">
+        <h3>Share instantly</h3>
+        <p>Publish your scene to the gallery and embed it anywhere with a single link.</p>
+      </article>
+
+      <article class="feature">
+        <h3>Rate the best work</h3>
+        <p>Rate other creators, leave comments, and climb weekly leaderboards.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Community grid -->
+  <section class="section section--community" id="community">
+    <div class="section__header">
+      <h2>Community gallery</h2>
+      <div class="filters">
+        <label>
+          Sort by
+          <select>
+            <option>Top rated</option>
+            <option>Newest</option>
+            <option>Trending</option>
+          </select>
+        </label>
+        <div class="filter-tags">
+          <button class="tag tag--active">All</button>
+          <button class="tag">Dashboards</button>
+          <button class="tag">Layouts</button>
+          <button class="tag">Experimental</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="works-grid">
+      <!-- Repeat this card -->
+      <article class="work-card">
+        <div class="work-card__thumb"></div>
+        <div class="work-card__body">
+          <h3 class="work-card__title">Dark UI dashboard</h3>
+          <div class="work-card__footer">
+            <span class="username">@designer</span>
+            <span class="work-card__rating">★ 4.6</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Bottom call to action -->
+  <section class="section section--cta">
+    <div class="section__header section__header--center">
+      <h2>Ready to build your first scene?</h2>
+      <p>Join designers experimenting with 3D interfaces directly in the browser.</p>
+      <a href="#start" class="btn btn--primary btn--large">Start Creating for Free</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>© 2026 3D CSS Builder</p>
+</footer>
+
+</body>
+</html>

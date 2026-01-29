@@ -1,0 +1,22 @@
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.feature {
+    padding: 18px 20px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-subtle);
+    background: rgba(17, 19, 27, 0.9);
+}
+
+.feature h3 {
+    margin: 0 0 6px;
+}
+
+@media (max-width: 960px) {
+    .features {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

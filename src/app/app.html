@@ -1,10 +1,11 @@
-<app-header [title]="title()">
-  <!-- optional projected content (actions) -->
-</app-header>
-
+<app-header [title]="title()"></app-header>
 <main>
+  <app-hero></app-hero>
+  <app-community-slider></app-community-slider>
+  <app-tutorial></app-tutorial>
+  <app-features></app-features>
+  <app-community-grid></app-community-grid>
+  <app-cta></app-cta>
   <router-outlet></router-outlet>
 </main>
-
-
 <app-footer></app-footer>
