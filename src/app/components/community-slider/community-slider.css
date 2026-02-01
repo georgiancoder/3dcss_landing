@@ -1,0 +1,62 @@
+.section--slider {
+    padding-top: 40px;
+}
+
+.works-slider {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 16px;
+}
+
+.slider__track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(260px, 1fr);
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 10px;
+}
+
+.slider__track::-webkit-scrollbar {
+    height: 4px;
+}
+
+.slider__track::-webkit-scrollbar-thumb {
+    background: var(--border-subtle);
+    border-radius: 999px;
+}
+
+.slider__arrow {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(15, 17, 24, 0.9);
+    cursor: pointer;
+}
+
+.slider__pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    border: none;
+    background: var(--border-subtle);
+}
+
+.dot--active {
+    background: var(--accent);
+}
+
+.section__footer {
+    text-align: center;
+    /* Inferred from previous context, keeping consistent */
+}
