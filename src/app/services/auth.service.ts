@@ -28,7 +28,7 @@ export class AuthService {
       // get fresh idToken and send to server
       const idToken = await auth.currentUser?.getIdToken(true);
       if (idToken) {
-        await fetch('https://api-twypgdks3a-uc.a.run.app/users-signin', {
+        await fetch('https://css-3d.com/api/users-signin', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ idToken }),
