@@ -44,19 +44,33 @@ export class AuthService {
   // Sign out
   async signOut(): Promise<void> {
     try {
-      // Clear shared session cookie (affects both domains)
-      await fetch("/api/users-signout", {
-        method: "POST",
-        credentials: "include",
-      });
+      // Get current ID token before signing out
+      const idToken = await auth.currentUser?.getIdToken(true);
+      console.log(idToken, 'idToken');
+      if (idToken) {
+        // Revoke session server-side (optional but recommended)
+        await fetch("/api/users-signout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idToken }), // pass for revoke
+          credentials: "include",
+        });
+      } else {
+        // Just clear cookie if no Firebase user
+        await fetch("/api/users-signout", {
+          method: "POST",
+          credentials: "include",
+        });
+      }
 
-      // Clear Firebase Auth state on this domain
-      await firebaseSignOut(auth);
+      // Clear local Firebase state
+      await auth.signOut();
 
+      window.location.href = "/";
     } catch (error) {
       console.error("Sign out failed:", error);
-    }
-  }
+      await auth.signOut(); // Fallback
+    }  }
 
   // helper to get current user synchronously
   get currentUser(): User | null {
