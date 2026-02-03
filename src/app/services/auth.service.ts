@@ -43,7 +43,19 @@ export class AuthService {
 
   // Sign out
   async signOut(): Promise<void> {
-    await firebaseSignOut(auth);
+    try {
+      // Clear shared session cookie (affects both domains)
+      await fetch("/api/users-signout", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      // Clear Firebase Auth state on this domain
+      await firebaseSignOut(auth);
+
+    } catch (error) {
+      console.error("Sign out failed:", error);
+    }
   }
 
   // helper to get current user synchronously
