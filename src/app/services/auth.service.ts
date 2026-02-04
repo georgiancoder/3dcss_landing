@@ -16,20 +16,19 @@ export class AuthService {
 
   constructor() {
     // listen for auth state changes
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // Try to refresh token - fails if revoked server-side
-        user.getIdToken(true)
-          .then(() => {
-            this.userSubject.next(user);
-          })
-          .catch(() => {
-            // Token revoked server-side → auto sign out
-            console.log("Session revoked server-side");
-            auth.signOut();
-          });
+        try {
+          await user.getIdToken(true); // Detects revokeRefreshTokens()
+          this.userSubject.next(user);
+        } catch {
+          console.log("Session revoked server-side");
+          await auth.signOut();
+          this.userSubject.next(null);
+        }
+      } else {
+        this.userSubject.next(null);
       }
-      this.userSubject.next(user ?? null);
     });
   }
 
