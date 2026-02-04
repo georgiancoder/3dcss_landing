@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FirestoreService } from '../../services/firestore.service';
 import { AuthService } from '../../services/auth.service';
+import { LogoutSyncService } from '../../services/logout-sync.service';
 
 @Component({
     selector: 'app-header',
@@ -15,7 +16,8 @@ export class Header implements OnInit {
 
     constructor(
         private firestore: FirestoreService,
-        public auth: AuthService
+        public auth: AuthService,
+        private logoutSync: LogoutSyncService,
     ) { }
 
     async ngOnInit(): Promise<void> {
@@ -35,9 +37,11 @@ export class Header implements OnInit {
         }
     }
 
+
+
     async signOut(): Promise<void> {
         try {
-            await this.auth.signOut();
+            await this.logoutSync.signOutBothApps();
         } catch (err) {
             console.error('Sign-out failed', err);
         }
