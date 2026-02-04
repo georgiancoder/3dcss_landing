@@ -41,7 +41,7 @@ export class Header implements OnInit {
 
     async signOut(): Promise<void> {
         try {
-            await this.logoutSync.signOutBothApps();
+            await this.auth.signOut();
         } catch (err) {
             console.error('Sign-out failed', err);
         }
