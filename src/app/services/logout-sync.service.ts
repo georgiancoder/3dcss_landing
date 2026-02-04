@@ -18,7 +18,6 @@ export class LogoutSyncService {
     private readonly http: HttpClient,
     private readonly ngZone: NgZone
   ) {
-    this.initListeners();
   }
 
   /**
@@ -26,7 +25,6 @@ export class LogoutSyncService {
    */
   async signOutBothApps(): Promise<void> {
     // 1) Notify other tabs/apps first
-    this.broadcastLogout();
 
     // 2) Clear shared session cookie (server)
     // Try to include idToken if available (matches existing backend expectations).
@@ -63,31 +61,5 @@ export class LogoutSyncService {
 
     // Fallback/best-effort. The receiver will decide whether to trust it.
     window.postMessage({ type: 'LOGOUT_FIREBASE' }, '*');
-  }
-
-  private initListeners(): void {
-    // BroadcastChannel listener
-    if ('BroadcastChannel' in window) {
-      this.channel = new BroadcastChannel(this.channelName);
-      this.channel.onmessage = (event: MessageEvent) => {
-        if (event.data === 'LOGOUT') {
-          this.ngZone.run(() => void this.handleRemoteLogout());
-        }
-      };
-    }
-
-    // postMessage fallback listener
-    window.addEventListener('message', (event: MessageEvent) => {
-      const data: any = event.data;
-      if (data && data.type === 'LOGOUT_FIREBASE') {
-        this.ngZone.run(() => void this.handleRemoteLogout());
-      }
-    });
-  }
-
-  private async handleRemoteLogout(): Promise<void> {
-    // Don’t recurse/broadcast again. Just sign out locally.
-    await auth.signOut();
-    window.location.reload();
   }
 }

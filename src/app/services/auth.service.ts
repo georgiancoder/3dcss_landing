@@ -17,6 +17,18 @@ export class AuthService {
   constructor() {
     // listen for auth state changes
     onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Try to refresh token - fails if revoked server-side
+        user.getIdToken(true)
+          .then(() => {
+            this.userSubject.next(user);
+          })
+          .catch(() => {
+            // Token revoked server-side → auto sign out
+            console.log("Session revoked server-side");
+            auth.signOut();
+          });
+      }
       this.userSubject.next(user ?? null);
     });
   }
