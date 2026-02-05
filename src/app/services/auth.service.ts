@@ -109,11 +109,23 @@ export class AuthService {
 
     const path = `logoutFlags/${uid}`;
     const nodeRef = ref(rtdb, path);
+    const startedAt = Date.now();
     // onValue returns an unsubscribe function
     this.logoutUnsubscribe = onValue(nodeRef, (snapshot) => {
-      const logoutTime = snapshot.val();
-      if (logoutTime) {
-        console.log('Logout flag detected:', logoutTime);
+      const raw = snapshot.val();
+      if (!raw) return;
+
+      // normalize to milliseconds (handles seconds or ms)
+      const logoutNum = Number(raw);
+      const logoutMs = !isNaN(logoutNum)
+        ? (logoutNum < 1e12 ? logoutNum * 1000 : logoutNum)
+        : NaN;
+
+      if (isNaN(logoutMs)) return;
+
+      // only act on flags created after this listener started
+      if (logoutMs > startedAt) {
+        console.log('Logout flag detected:', logoutMs);
         // force sign out locally
         auth.signOut().catch(err => console.error('RTDB-forced signOut failed', err));
         this.userSubject.next(null);
