@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth, GithubAuthProvider } from 'firebase/auth';
+import { getDatabase } from 'firebase/database'; // added
 
 // TODO: replace the following with your Firebase project's config values
 const firebaseConfig = {
@@ -21,3 +22,6 @@ export const auth = getAuth(firebaseApp);
 export const githubProvider = new GithubAuthProvider();
 // optional: request additional scopes if needed
 // githubProvider.addScope('read:user');
+
+// export Realtime Database for cross-device logout signaling
+export const rtdb = getDatabase(firebaseApp);
