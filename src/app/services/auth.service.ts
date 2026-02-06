@@ -14,6 +14,9 @@ export class AuthService {
   private userSubject = new BehaviorSubject<User | null>(null);
   public readonly user$: Observable<User | null> = this.userSubject.asObservable();
 
+  private static readonly API_BASE = '/api';
+  // private static readonly API_BASE = 'http://127.0.0.1:5001/css3d-2641c/us-central1/api';
+
   // holds the unsubscribe function returned by onValue() for the current user's logout flag
   private logoutUnsubscribe: (() => void) | null = null;
 
@@ -43,61 +46,27 @@ export class AuthService {
   async signInWithGithub(): Promise<UserCredential | null> {
     const credential = await signInWithPopup(auth, githubProvider);
     try {
-      // get fresh idToken and send to server
       const idToken = await auth.currentUser?.getIdToken(true);
       if (idToken) {
-        await fetch('/api/users-signin', {
+        await fetch(`${AuthService.API_BASE}/users-signin`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          // headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ idToken }),
           credentials: 'include',
         });
       }
     } catch (err) {
-      // log but don't block client-side sign-in
       console.error('Failed to send idToken to server', err);
     }
     return credential;
   }
 
-  // Sign out (local + notify server to clear session cookie)
-  async signOut(): Promise<void> {
-    try {
-      // Get current ID token before signing out
-      const idToken = await auth.currentUser?.getIdToken(true);
-      if (idToken) {
-        // ask server to revoke / clear session cookie
-        await fetch('/api/users-signout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ idToken }),
-          credentials: 'include',
-        });
-      } else {
-        // fallback: clear cookie
-        await fetch('/api/users-signout', {
-          method: 'POST',
-          credentials: 'include',
-        });
-      }
-    } catch (error) {
-      console.error('Sign out server notify failed:', error);
-    } finally {
-      // Always sign out locally
-      await auth.signOut();
-      this.userSubject.next(null);
-      this.stopLogoutListener();
-      // optional: redirect to home
-      try { window.location.href = '/'; } catch {}
-    }
-  }
-
   // Call this to set a "logout flag" server-side so other devices see it in RTDB and sign out
   async signOutEverywhere(): Promise<void> {
     const idToken = await auth.currentUser?.getIdToken(true);
-    await fetch('/api/users-setLogoutFlag', {
+    await fetch(`${AuthService.API_BASE}/users-setLogoutFlag`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      // headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ idToken }),
       credentials: 'include',
     });
