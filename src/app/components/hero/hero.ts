@@ -1,11 +1,7 @@
-import {Component, makeStateKey, PLATFORM_ID, TransferState, inject, signal, Inject, Optional, PendingTasks } from '@angular/core';
-import {isPlatformServer} from '@angular/common';
-import {FIREBASE_ADMIN} from '../../server/admin-token';
-import firebase from 'firebase/compat/app';
-import app = firebase.app;
-import { getFirestore } from 'firebase-admin/firestore';
+import {Component } from '@angular/core';
 
-const POSTS_KEY = makeStateKey<any[]>('posts');
+
+// const POSTS_KEY = makeStateKey<any[]>('posts');
 
 @Component({
     selector: 'app-hero',
