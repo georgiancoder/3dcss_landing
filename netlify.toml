@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  publish = "dist/<your-project-name>/browser"
+  publish = "dist/css3dLanding/browser"
 
 [functions]
   # Needed to correctly bundle heavy Node modules like firebase-admin
