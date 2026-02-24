@@ -1,13 +1,9 @@
 
-import express from 'express';
-import { join } from 'node:path';
 import dotenv from "dotenv";
 import {AngularAppEngine, createRequestHandler} from '@angular/ssr';
 import {getContext} from '@netlify/angular-runtime/context';
 
-const browserDistFolder = join(import.meta.dirname, '../browser');
 
-const app = express();
 const angularAppEngine = new AngularAppEngine()
 
 
