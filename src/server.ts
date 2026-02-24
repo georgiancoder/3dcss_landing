@@ -1,5 +1,4 @@
 
-import dotenv from "dotenv";
 import {AngularAppEngine, createRequestHandler} from '@angular/ssr';
 import {getContext} from '@netlify/angular-runtime/context';
 
@@ -7,7 +6,6 @@ import {getContext} from '@netlify/angular-runtime/context';
 const angularAppEngine = new AngularAppEngine()
 
 
-dotenv.config();
 
 /**
  * Example Express Rest API endpoints can be defined here.
