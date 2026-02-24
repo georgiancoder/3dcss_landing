@@ -1,11 +1,12 @@
-[[redirects]]
-  from = "/api/*"
-  to = "https://api-twypgdks3a-uc.a.run.app/:splat"
-  status = 200
-  force = true
+[build]
+  command = "npm run build"
+  publish = "dist/<your-project-name>/browser"
 
-# Your normal SPA fallback
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+[functions]
+  # Needed to correctly bundle heavy Node modules like firebase-admin
+  node_bundler = "esbuild"
+  # Ensures the server code is shipped to the function
+  external_node_modules = ["firebase-admin"]
+
+[[plugins]]
+  package = "@netlify/angular-runtime"
